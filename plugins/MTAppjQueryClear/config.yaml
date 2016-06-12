@@ -1,0 +1,27 @@
+id: MTAppjQueryClear
+key: MTAppjQueryClear
+name: MTAppjQueryClear
+author_name: Yuji Takayama
+author_link: http://swordbreaker.net/
+description: "Sometimes, the admin screen is crashed by my wrong MTAppjQuery script. But please don't worry! You can clear all MTAppjQuery script by this plugin."
+version: 1.0
+
+settings:
+  dummy:
+  system_config_template: config.tmpl
+  blog_config_template: config.tmpl
+
+  callbacks:
+    save_config_filter: >
+      sub {
+        my $app = MT->instance;
+        my $plugin = MT->component('mt_app_jquery');
+
+        my $blog = $app->blog;
+        my $key;
+        if ( $blog ) {
+          $key = 'blog:' . $blog->id;
+        }
+        $plugin->reset_config( $key );
+        return 1;
+      }
