@@ -8,12 +8,12 @@ version: 1.0
 
 settings:
   dummy:
-  system_config_template: config.tmpl
-  blog_config_template: config.tmpl
+system_config_template: config.tmpl
+blog_config_template: config.tmpl
 
-  callbacks:
-    save_config_filter: >
-      sub {
+callbacks:
+  save_config_filter: >
+    sub {
         my $app = MT->instance;
         my $plugin = MT->component('mt_app_jquery');
 
@@ -24,4 +24,4 @@ settings:
         }
         $plugin->reset_config( $key );
         return 1;
-      }
+    }
